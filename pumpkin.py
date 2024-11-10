@@ -7,8 +7,8 @@ import time
 import neopixel
 
 PIXEL_PIN = 28
-MAX_TEMP = 15
-MIN_TEMP = 0
+MIN_TEMP = -2
+MAX_TEMP = 14
 
 led = machine.Pin('LED', machine.Pin.OUT)
 led.high()
@@ -52,7 +52,7 @@ def temp():
 def temp2color(temp):
     t = MAX_TEMP if temp > MAX_TEMP else temp
     t = MIN_TEMP if t < MIN_TEMP else t
-    hue = 65535-round(t/(MAX_TEMP-MIN_TEMP)*65535)
+    hue = 49152-round((t-MIN_TEMP)/(MAX_TEMP-MIN_TEMP)*49152)
     return hsv2color(hue, 250, 255)
 
 def test():
